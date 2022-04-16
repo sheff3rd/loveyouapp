@@ -1,0 +1,3 @@
+function initializeWorker() {
+  alert("Ready")
+}
