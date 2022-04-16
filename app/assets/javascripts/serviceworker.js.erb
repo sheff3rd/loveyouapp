@@ -57,9 +57,7 @@ function onFetch(event) {
 }
 
 self.addEventListener("push", (event) => {
-  console.log("push")
   var data = event.data.json();
-  console.log(data);
   let title = (event.data && data.title);
   let body =  (event.data && data.body);
   let icon =  (event.data && data.icon);
