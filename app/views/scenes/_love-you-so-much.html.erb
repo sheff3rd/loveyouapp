@@ -1,0 +1,86 @@
+<script>
+
+  window.vapidPublicKey = new Uint8Array(<%= generate_vapid_key %>);
+  window.addEventListener("load", registerWorker)
+
+  if (!("Notification" in window)) {
+    console.error("This browser does not support desktop notification");
+  }
+
+  else if (Notification.permission === "granted") {
+    console.log("Permission to receive notifications has been granted");
+  }
+
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      if (permission === "granted") {
+        console.log("Permission to receive notifications has been granted");
+      }
+    });
+  }
+
+  function registerWorker() {
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register("/serviceworker.js", { scope: "./" })
+        .then(function(reg) {
+          console.log("[Page] Service worker registered!");
+        });
+    }
+  }
+
+  function subscribe() {
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      serviceWorkerRegistration.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: window.vapidPublicKey
+      });
+    });
+
+    push();
+  }
+
+  function unsubscribe() {
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      serviceWorkerRegistration.pushManager.getSubscription()
+      .then((subscription) => {
+        fetch("/push", {
+          method: "DELETE",
+          headers: {
+            "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            subscription: subscription.toJSON()
+          }),
+        })
+      })
+    });
+  }
+
+  function push() {
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      serviceWorkerRegistration.pushManager.getSubscription()
+      .then((subscription) => {
+        fetch("/push", {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": document.querySelector("[name='csrf-token']").content,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            subscription: subscription.toJSON()
+          }),
+        });
+      });
+    });
+  }
+</script>
+
+
+<div class="text-center pt-5">
+  <h1 class="pb-3">Love you so much!</h1>
+
+  <button class="btn btn-large btn-success" type="button" onclick="subscribe();">Subscribe</button>
+  <button class="btn btn-large btn-danger" type="button" onclick="unsubscribe()">Unsubscribe</button>
+</div>

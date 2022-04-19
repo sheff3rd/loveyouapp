@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'subscriptions/index'
-  root "subscriptions#index"
+  root "scenes#index"
 
   resource :push, only: [:create, :destroy], controller: "push"
+  resources :scenes, only: [:index, :show], param: :slug
 end
