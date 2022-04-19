@@ -6,7 +6,7 @@ class ScenesController < ApplicationController
   def show
     @scene = Scene.find_by(slug: params[:slug])
 
-    send(@scene.slug.gsub("-", "_") + "_partial")
+    try(@scene.slug.gsub("-", "_") + "_partial")
   end
 
   private

@@ -13,5 +13,16 @@ namespace :scenes do
         content_type: "image/jpeg"
       }
     )
+
+    Scene.create!(
+      title: "Three Dimensional Scene",
+      description: "Three js test scene",
+      slug: "three-dimensional",
+      thumbnail: {
+        io: File.open("#{Rails.root}/public/images/three-dimensional.png"),
+        filename: "three-dimensional.png",
+        content_type: "image/png"
+      }
+    )
   end
 end

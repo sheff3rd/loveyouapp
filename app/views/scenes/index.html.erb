@@ -1,6 +1,6 @@
 <h1 class="text-center py-5">Available Scenes</h1>
 
-<div class="text-center mx-5">
+<div class="d-flex justify-content-center mx-5">
   <% @scenes.in_groups_of(3).each do |scene_batch| %>
     <% scene_batch.compact.each do |scene| %>
       <%= render "card", scene: scene %>

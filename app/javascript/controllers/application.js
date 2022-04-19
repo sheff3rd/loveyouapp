@@ -1,10 +1,11 @@
 import { Application } from "@hotwired/stimulus"
-import Subscription from "@subscription"
+import * as THREE from "three";
 
 const application = Application.start()
 
 // Configure Stimulus development experience
 application.debug = false
 window.Stimulus   = application
+window.THREE       = THREE
 
 export { application }
