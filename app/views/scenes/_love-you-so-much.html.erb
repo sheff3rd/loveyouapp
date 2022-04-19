@@ -1,6 +1,6 @@
 <script>
 
-  window.vapidPublicKey = new Uint8Array(<%= generate_vapid_key %>);
+  window.vapidPublicKey = new Uint8Array(<%= @publicVapidKey %>);
   window.addEventListener("load", registerWorker)
 
   if (!("Notification" in window)) {
