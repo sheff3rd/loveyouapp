@@ -7,6 +7,9 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin "@serviceworker", to: "/serviceworker.js", preload: true
 
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin_all_from "app/javascript/partials", under: "partials"
+pin_all_from "app/javascript/libs", under: "libs"
+
 pin_all_from "https://ga.jspm.io/npm:three@0.139.2/build/three.module.js", under: "three"
 
 pin "three", to: "https://ga.jspm.io/npm:three@0.139.2/build/three.module.js"
