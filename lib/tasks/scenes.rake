@@ -15,13 +15,18 @@ namespace :scenes do
     )
 
     Scene.create!(
-      title: "Three Dimensional Scene",
-      description: "Three js test scene",
-      slug: "three-dimensional",
+      title: "Киця-кицюня",
+      description: "У маленькій у хатині на тепленькій кожушині, Хтось дрімає хтось муркоче спозаранку спатки хоче.",
+      slug: "kitty-cat",
       thumbnail: {
-        io: File.open("#{Rails.root}/public/images/three-dimensional.png"),
-        filename: "three-dimensional.png",
-        content_type: "image/png"
+        io: File.open("#{Rails.root}/public/images/kitty-cat.jpeg"),
+        filename: "kitty-cat.jpeg",
+        content_type: "image/jped"
+      },
+      soundtrack: {
+        io: File.open("#{Rails.root}/public/sounds/kitty.mp3"),
+        filename: "kitty.mp3",
+        content_type: "audio/mpeg"
       }
     )
   end

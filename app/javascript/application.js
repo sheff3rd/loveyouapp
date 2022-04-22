@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "@serviceworker"
+
+import "./partials/_kitty-cat.js"
+import "./libs/stats.module.js"
